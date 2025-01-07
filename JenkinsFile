@@ -1,0 +1,31 @@
+pipeline {
+    agent any
+
+    stages {
+        stage('Without Npm') {
+            steps {
+                sh '''
+                echo "We have to install npm first"
+                ls -l
+                '''
+                
+            }
+        }
+        
+        stage('With Npm') {
+            agent{
+                    docker{
+                        image 'node:18-alpine'
+                        reuseNode true
+                    }
+                }
+            steps {
+                sh '''
+                echo "Using Docker"
+                ls -l
+                '''
+            }
+            
+        }
+    }
+}
