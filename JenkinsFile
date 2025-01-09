@@ -33,10 +33,13 @@ pipeline {
             
         }
         stage('Test index page'){
-            sh'''
+            steps{
+                sh'''
                 test -f build/index.html
                 npm test
             '''
+            }            
+            
             
         }
     }
